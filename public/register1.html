@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@700&family=Lobster+Two&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/register.css">
+    <title>Registration</title>
+
+    <style>
+        body{
+            background-image:url(images/aaron-burden-QJDzYT_K8Xg-unsplash.jpg);
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+        }
+    </style>
+</head>
+
+<body>
+
+    
+    <div class="container">
+        <div class="heading">
+            E-BookStall
+        </div>
+        <div class="title">
+            Registration Form
+        </div>
+
+        <form action="index.html">
+            <div class="form-input">
+                <label for="firstName">First Name</label>
+                <input type="text" id="firstName" class="form-control" required="required" autofocus="autofocus">
+            </div>
+
+            <div class="form-input">
+                <label for="lastName">Last Name</label>
+                <input type="text" id="lastName" class="form-control" required="required">
+            </div>
+
+
+            <div class="form-input">
+                <label for="licensenumber">License Number</label>
+                <input type="text" id="lno" class="form-control" required="required" autofocus="autofocus">
+            </div>
+
+
+            <div class="form-input">
+                <label for="lastName">Address</label>
+                <input type="text" id="address" class="form-control" required="required">
+            </div>
+
+
+            <div class="form-input">
+                <label for="email">Email</label>
+                <input type="text" id="email" class="form-control" required="required">
+            </div>
+
+
+            <div class="form-input">
+                <label for="password">Password</label>
+                <input type="password" id="password" class="form-control" required="required">
+            </div>
+
+            <div class="reg" style="padding-top: 10px;">
+                <input id="btn-register" type="submit" value="Register" class="btn">
+            </div>
+
+            <div class="redirect">
+                <p style="color:black">Registered User?<a  href="login.html"> Log in to the System</a></p>
+             </div>
+    </div>
+    </form>
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- Core plugin JavaScript-->
+<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="js/notify.min.js"></script>
+<script src="js/index.js"></script>
+
+
+</body>
+
+</html>
