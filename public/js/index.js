@@ -164,6 +164,7 @@ function getRegisterDetails() {
         console.log(response);
         if(response.data.success){
             alert("Successfully Registered!");
+            window.location.href="available_books.html";
             document.getElementById('firstName').value = "";
             document.getElementById('lastName').value = "";
             document.getElementById('lno').value = "";
@@ -222,21 +223,29 @@ function loadAvailableBooksTable() {
     html = ''
     response.data.forEach(request => {
         
-        if(i % 3 === 0 || i === 0){
-            html += '<tr style="border:5px;">'
-        }
-        i=i+1;
-        html +='<td align="center" style="border: 1px solid; border-radius: 700px; background-color:white; margin-top:15px;">'+'<a href="book_details.html#'+request.ISBN+'"title="">'+'<img id="thumb" style="width:150px;height:200px" src="./images/'+ request.ISBN +'.png"/>'+'</a>'+'<br><br>' ;
-        html +='<b>'+request.BookName+" by "+'</b>'+'<b>'+request.Author+'</b><br>';
-        html +='<b>'+"Rs."+request.PricePerDay + '</b></br>';
+    //     if(i % 3 === 0 || i === 0){
+    //         html += '<tr style="border:5px;">'
+    //     }
+    //     i=i+1;
+    //     html +='<td align="center" style="border: 1px solid; border-radius: 700px; background-color:white; margin-top:15px;">'+'<a href="book_details.html#'+request.ISBN+'"title="">'+'<img id="thumb" style="width:150px;height:200px" src="./images/'+ request.ISBN +'.png"/>'+'</a>'+'<br><br>' ;
+    //     html +='<b>'+request.BookName+" by "+'</b>'+'<b>'+request.Author+'</b><br>';
+    //     html +='<b>'+"Rs."+request.PricePerDay + '</b></br>';
        
-       '</td>' ;
+    //    '</td>' ;
       
-      if(i % 3 === 0 || i === 0){
-        html += '</tr>'
-       }
+    //   if(i % 3 === 0 || i === 0){
+    //     html += '</tr>'
+    //    }
+    if(i % 5=== 0 || i === 0){
+        html += '<div class="row" style="margin:10px;">';
+    }
+    i=i+1;
+    html+='<div class="card" style="margin:10px;">'+'<a href="book_details.html#'+request.ISBN+'"title="">'+'<img id="thumb" style="width:250px;height:300px;display:inline-block;margin:10px;" src="./images/'+ request.ISBN +'.png"/>'+'</a>'+'<div class="container-fluid" style="width:250px; font-size:14px;">'+request.BookName+'<p style="font-size:12px;">'+'<b>'+"by "+request.Author+'</b>'+'</p>'+'</div>'+'</div>';
+    if(i % 5 === 0 || i === 0){
+        html += '</div>';
+    }
     });
-    $('#view-available-books tbody').append(html);
+    $('#view-available-books').append(html);
  })
     .catch(function (error) {
         console.log(error);
