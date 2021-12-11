@@ -89,6 +89,14 @@ if (CURRENT_URL.includes('available_books')) {
     loadAvailableBooksTable();
 }
 
+if (CURRENT_URL.includes('engineering')) {
+    loadAvailableBooksTableEngineering();
+}
+
+if (CURRENT_URL.includes('novels')) {
+    loadAvailableBooksTable();
+}
+
 if (CURRENT_URL.includes('book_details')) {
     getBookDetails();
     initiateDatePickers();
@@ -244,6 +252,48 @@ function loadAvailableBooksTable() {
     if(i % 5 === 0 || i === 0){
         html += '</div>';
     }
+    });
+    $('#view-available-books').append(html);
+ })
+    .catch(function (error) {
+        console.log(error);
+    });
+}
+
+// Engineering Section
+
+function loadAvailableBooksTableEngineering() {
+    let i=0;
+    axios.get(baseUrlLocal + '/book/info')
+ .then(function (response) {
+    console.log(response)
+    console.log(response.data)
+    html = ''
+    response.data.forEach(request => {
+        
+    //     if(i % 3 === 0 || i === 0){
+    //         html += '<tr style="border:5px;">'
+    //     }
+    //     i=i+1;
+    //     html +='<td align="center" style="border: 1px solid; border-radius: 700px; background-color:white; margin-top:15px;">'+'<a href="book_details.html#'+request.ISBN+'"title="">'+'<img id="thumb" style="width:150px;height:200px" src="./images/'+ request.ISBN +'.png"/>'+'</a>'+'<br><br>' ;
+    //     html +='<b>'+request.BookName+" by "+'</b>'+'<b>'+request.Author+'</b><br>';
+    //     html +='<b>'+"Rs."+request.PricePerDay + '</b></br>';
+       
+    //    '</td>' ;
+      
+    //   if(i % 3 === 0 || i === 0){
+    //     html += '</tr>'
+    //    }
+    if(request.Category == "Engineering"){
+    if(i % 5=== 0 || i === 0){
+        html += '<div class="row" style="margin:10px;">';
+    }
+    i=i+1;
+    html+='<div class="card" style="margin:10px;">'+'<a href="book_details.html#'+request.ISBN+'"title="">'+'<img id="thumb" style="width:250px;height:300px;display:inline-block;margin:10px;" src="./images/'+ request.ISBN +'.png"/>'+'</a>'+'<div class="container-fluid" style="width:250px; font-size:14px;">'+request.BookName+'<p style="font-size:12px;">'+'<b>'+"by "+request.Author+'</b>'+'</p>'+'</div>'+'</div>';
+    if(i % 5 === 0 || i === 0){
+        html += '</div>';
+    }
+}
     });
     $('#view-available-books').append(html);
  })
@@ -444,11 +494,12 @@ function addNewBook() {
         AvailableDate: null,
         RentedBy: null,
         Rented: 0,
-        Description: $("#desc").val()
+        Description: $("#desc").val(),
+        Category: $("#category-name").val()
        
     }
     console.log(data);
-    if(data.ISBN.length != 0||data.BookName.length != 0||data.Author.length != 0||data.PricePerDay.length != 0||data.Description.length != 0){
+    if(data.ISBN.length != 0||data.BookName.length != 0||data.Author.length != 0||data.PricePerDay.length != 0||data.Description.length != 0||data.Category.length!=0){
     axios.post(baseUrlLocal+'/book',data, {headers: headers})
     .then(response => {
         if (response.data.success) {
@@ -457,7 +508,8 @@ function addNewBook() {
         $("#b-name").val(''),
         $("#author-name").val(''),
         $("#ppday").val(''),
-        $("#desc").val('')
+        $("#desc").val(''),
+        $("#category-name").val('')
     }
         })
         .catch(function (error) {

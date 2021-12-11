@@ -18,7 +18,8 @@ router.post('/', function(req, res) {
             AvailableDate: req.body.AvailableDate,
             RentedBy: req.body.RentedBy,
             Rented: req.body.Rented,
-            Description: req.body.Description
+            Description: req.body.Description,
+            Category: req.body.Category
         });
 
         bookData.save(err => { 

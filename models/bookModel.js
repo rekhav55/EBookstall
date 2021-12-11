@@ -10,7 +10,8 @@ let bookSchema = mongoose.Schema({
     AvailableDate: String,
     RentedBy: String,
     Rented: Number,
-    Description: String
+    Description: String,
+    Category: String
 });
 
 
