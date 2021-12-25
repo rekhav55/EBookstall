@@ -22,7 +22,7 @@
     <title>Home</title>
 </head>
 
-<body class="fixed-nav">
+<body>
 
     <!-- navbar: start -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
@@ -32,9 +32,11 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="summary.html" style="color:white; font-size: large; margin-top: 5px;">Summary</a>
+                </li>
             </ul>
-
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item" data-toggle="tooltip" data-placement="left" title="Logout">
                     <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
@@ -45,75 +47,51 @@
         </div>
     </nav>
     <!-- navbar: end -->
-
-    <div class="content-wrapper">
-        <div class="container-fluid">
-            <div>
-                <div class="card">
-                    <div class="card-header">
-                        <h4 class="text-center">Add New Book to Library</h4>
-                    </div>
-                    <div class="card-body">
-                        <form>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="name-student">ISBN</label>
-                                    <input type="text" class="form-control" id="isbn-b" placeholder="ISBN" required="required">
-                                </div>
-                                <div class="form-group col-md-6">
-                                        <label for="name-student">Book Name</label>
-                                        <input type="text" class="form-control" id="b-name" placeholder="Book Name" required="required">
-                                    </div>
-                            </div>
-        
-                            <div class="form-row">
-                                    <div class="form-group col-md-6">
-                                            <label for="">Author</label>
-                                            <input type="text" class="form-control" id="author-name" placeholder="Author" required="required">
-                                            <label for="">Category</label>
-                                            <input type="text" class="form-control" id="category-name" placeholder="Category" required="required">
-                                    </div>
-                            <div class="form-group col-md-6">
-                                <label for="inlineFormInputGroup">Price Per Day</label>
-                                <div class="input-group mb-2">
-                                  <div class="input-group-prepend">
-                                    <div class="input-group-text">Rs.</div>
-                                  </div>
-                                  <input type="number" class="form-control" id="ppday" placeholder="Price Per Day" min="0">
-                                </div>
-                            </div>
-                           
-                        </div>
-        
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="exampleFormControlTextarea1">Description</label>
-                                    <textarea class="form-control" id="desc" rows="5"></textarea>
-                                </div>
-
-                                <div class="form-group col-md-6"></form>
-                                        <br/><br/><br/>
-                                        <form id="frmUploader" enctype="multipart/form-data" action="book/api/Upload/" method="post">
-                                            <input type="file" name="pdfUploader" multiple />
-                                            <input type="submit" class="btn btn-success" name="submit"  id="btnSubmit" value="Upload" />
-                                        </form>
-                                        <br>
-                                    <form id="frmUploader" enctype="multipart/form-data" action="book/api/Uploadp/" method="post">
-                                        <input type="file" name="pdfUploader" multiple />
-                                        <input type="submit" class="btn btn-success" name="submit"  id="btnSubmit" value="Upload" />
-                                    </form>
-                                </div>
-
-                            </div>
-                            <a id ="btn-add" title="" class="btn btn-success">
-                                    <span><strong>Add Book</strong></span></a>
-                            </a>
-                        
-                    </div>
-                    </div>
+        <div class="container">
+            <form style="padding:15px;margin-top:55px; width: 500px; margin-left:250px; border-radius:5px; border:1px dotted black; border-bottom: none;">
+                <div style="margin-left:190px; margin-top:0px;">
+                    <h5>Add Book</h5>
                 </div>
-            </div>
-
+                <hr style="border:2px dotted black">
+                <div class="form-group">
+                    <label for="name-student">ISBN</label>
+                    <input type="text" class="form-control" id="isbn-b" placeholder="ISBN" required="required">
+                </div>
+                <div class="form-group">
+                    <label for="name-student">Book Name</label>
+                    <input type="text" class="form-control" id="b-name" placeholder="Book Name" required="required">
+                    <label for="">Author</label>
+                    <input type="text" class="form-control" id="author-name" placeholder="Author" required="required">
+                    <label for="">Category</label>
+                    <input type="text" class="form-control" id="category-name" placeholder="Category" required="required">
+                </div>
+                <div class="form-group">
+                <label for="inlineFormInputGroup">Price</label>
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Rs.</div>
+                    </div>
+                    <input type="number" class="form-control" id="ppday" placeholder="Price Per Day" min="0">
+                </div>
+                <label for="exampleFormControlTextarea1">Description</label>
+                <textarea class="form-control" id="desc" rows="2"></textarea>
+                </div>                
+            </form>
+            <form id="frmUploader" enctype="multipart/form-data" action="book/api/Upload/" method="post" style="padding-left:15px; margin-left:30px; width: 500px; margin-left:250px;border: 1px dotted black; border-top:none; border-bottom:none;">
+                <input type="file" name="pdfUploader" multiple />
+                <input type="submit" class="btn btn-success" name="submit" id="btnSubmit" value="Upload Cover Page" />
+            </form>
+            <form id="frmUploader" enctype="multipart/form-data" action="book/api/Uploadp/" method="post" style="padding-left:15px;margin:5px; width: 500px; margin-left:250px; border: 1px dotted black; border-top:none; border-radius:5px;">
+                <input type="file" name="pdfUploader" multiple />
+                <input type="submit" class="btn btn-success" name="submit" id="btnSubmit" value="Upload PDF" />
+                <div class="form-group" style="align-content: center; margin-left:190px; margin-top:15px;">
+                    <a id="btn-add" title="" class="btn btn-success">
+                        <span><strong>Add Book</strong></span></a>
+                    </a>
+                </div>
+            </form>
+            
+            
         </div>
 
         <!-- Logout Modal-->

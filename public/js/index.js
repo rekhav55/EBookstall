@@ -89,6 +89,10 @@ if (CURRENT_URL.includes('available_books')) {
     loadAvailableBooksTable();
 }
 
+if (CURRENT_URL.includes('summary')) {
+    loadAvailableBooksTable();
+}
+
 if (CURRENT_URL.includes('engineering')) {
     loadAvailableBooksTableEngineering();
 }
@@ -141,19 +145,9 @@ function checkBorrowerExists() {
 }
 
 function paypalIntegration() {
-
-    if( $("#tot").val().length == 0|| $("#days").val().length == 0
-     || $("#price").val().length == 0 || $("#datepicker1").val().length == 0 || $("#datepicker1").val().length == 0 ){
-        $.notify("Payment Cannot Process. Please check the details","error");
-    }
-    else{
-        $.notify("You will be directed to payment page","success");
-
-       
-        window.location.href = "user_dashboard.html";
-    }
-
+     window.location.href = "user_dashboard.html";
 }
+
 //Inserting the registration details of the user to the database
 function getRegisterDetails() {
     let registerData = {
@@ -321,9 +315,9 @@ function getBookDetails(){
             console.log(form_details[0].PricePerDay); 
             $("#book-name").append(form_details[0].BookName);  
             $("#description").append(form_details[0].Description);  
-            $("#price").val(form_details[0].PricePerDay);  
-            $("#ISBN").val(form_details[0].ISBN);  
-            $("#author").val(form_details[0].Author);  
+            $("#price").append(form_details[0].PricePerDay);  
+            $("#ISBN").append(form_details[0].ISBN);  
+            $("#author").append(form_details[0].Author);  
             document.getElementById('image').src = "./images/" + form_details[0].ISBN + ".png";
             
            if(form_details[0].Rented)
@@ -336,78 +330,78 @@ function getBookDetails(){
 
 // ********* Update with Rented Details*****************
 
-function updateUserWithRentedDetails() {
-    console.log("Function called");
-    let isbn=''
-        if (CURRENT_URL.includes('#')) {
-             isbn = CURRENT_URL.substr(CURRENT_URL.indexOf('#') + 1, CURRENT_URL.length);
-            console.log(isbn);
-        }
-    let userInfo = localStorage.getItem(USER_INFO) ? JSON.parse(localStorage.getItem(USER_INFO)) : [];
-    let email = userInfo.userData.Email;
+//  function updateUserWithRentedDetails() {
+//     console.log("Function called");
+//     let isbn=''
+//         if (CURRENT_URL.includes('#')) {
+//              isbn = CURRENT_URL.substr(CURRENT_URL.indexOf('#') + 1, CURRENT_URL.length);
+//             console.log(isbn);
+//         }
+//     let userInfo = localStorage.getItem(USER_INFO) ? JSON.parse(localStorage.getItem(USER_INFO)) : [];
+//     let email = userInfo.userData.Email;
    
-    let data = {
-        ISBN: isbn,
-        FromDate: $("#datepicker1").val(),
-        ToDate: $("#datepicker2").val(),
-        ReturnedDate: "0",
-        FeeDate: "0",
-        Fee: 0,
+//     let data = {
+//         ISBN: isbn,
+//         FromDate: $("#datepicker1").val(),
+//         ToDate: $("#datepicker2").val(),
+//         ReturnedDate: "0",
+//         FeeDate: "0",
+//         Fee: 0,
        
-    }
-    console.log(data);
-    axios.post(baseUrlLocal+'/register/info/'+email,data, {headers: headers})
-        .then(response => {
+//     }
+//     console.log(data);
+//     axios.post(baseUrlLocal+'/register/info/'+email,data, {headers: headers})
+//         .then(response => {
            
-        })
-        .catch(error => {
-            $.notify("Invalid Updation","warn");
+//         })
+//         .catch(error => {
+//             $.notify("Invalid Updation","warn");
         
-            console.log(error);
-        })
+//             console.log(error);
+//         })
 
-    axios.post(baseUrlLocal+'/book/'+data.ISBN,data, {headers: headers})
-        .then(response => {
+//     axios.post(baseUrlLocal+'/book/'+data.ISBN,data, {headers: headers})
+//         .then(response => {
            
-        })
-        .catch(error => {
-            $.notify("Invalid Updation","warn");
+//         })
+//         .catch(error => {
+//             $.notify("Invalid Updation","warn");
         
-            console.log(error);
-        })
-}
-//Triggering to any change in the ISBN
-$(document).ready(function() {   
+//             console.log(error);
+//         })
+// }
+// //Triggering to any change in the ISBN
+// $(document).ready(function() {   
 
-        $(document).on("change", "#isbn", function() {
-      console.log("changing")
-            let datax = {
-            isbn : $("#isbn").val()
-            }
-             axios.get(baseUrlLocal+'/register/bookmodel/'+datax.isbn)
-             .then(function (response) {
-                let form_details = response.data.data;
-                console.log(form_details[0].Qty)  
-                $("#fromdate").val(form_details[0].FromDate);  
-                $("#todate").val(form_details[0].ToDate);  
+//         $(document).on("change", "#isbn", function() {
+//       console.log("changing")
+//             let datax = {
+//             isbn : $("#isbn").val()
+//             }
+//              axios.get(baseUrlLocal+'/register/bookmodel/'+datax.isbn)
+//              .then(function (response) {
+//                 let form_details = response.data.data;
+//                 console.log(form_details[0].Qty)  
+//                 $("#fromdate").val(form_details[0].FromDate);  
+//                 $("#todate").val(form_details[0].ToDate);  
      
-             })
-             .catch(function (error) {
-                 // handle error
-                 console.log(error);
-             });
+//              })
+//              .catch(function (error) {
+//                  // handle error
+//                  console.log(error);
+//              });
 
-             axios.get(baseUrlLocal + '/book/info/'+datax.isbn).then(function (response) {
-                if (response.data) {
-                    console.log(response);
-                   pricePerDay = response.data.data[0].PricePerDay;
-                   console.log(pricePerDay);
-                }
-            }).catch(function (error) {
-                console.log(error);
-            });
-        })
-});
+//              axios.get(baseUrlLocal + '/book/info/'+datax.isbn).then(function (response) {
+//                 if (response.data) {
+//                     console.log(response);
+//                    pricePerDay = response.data.data[0].PricePerDay;
+//                    console.log(pricePerDay);
+//                 }
+//             }).catch(function (error) {
+//                 console.log(error);
+//             });
+//         })
+// }); -->
 
 function insertEachUserRent() {
     console.log('rent');
@@ -415,9 +409,9 @@ function insertEachUserRent() {
     let email = userInfo.userData.Email;
     let rentData = {
         Email:email,
-        ISBN: $("#ISBN").val(),
+        ISBN: $("#ISBN").text(),
         BookName: $("#book-name").text(),
-        Author: $("#author").val(),  
+        Author: $("#author").text(),  
     }   
     axios.post(baseUrlLocal + '/rent/' + rentData.ISBN, rentData, {
             headers: headers
@@ -527,9 +521,8 @@ function addNewBook() {
             url:'/book/api/Upload/',
             type:'post',
             data:$('#frmUploader').serialize(),
-            
             success:function(){
-               
+               $.notify("Book Uploaded");
 
             },
         });

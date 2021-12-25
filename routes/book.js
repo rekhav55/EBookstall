@@ -214,7 +214,7 @@ router.post("/api/Uploadp/", function(req, res) {
         if (err) {
             return res.end("Something went wrong!"+ err);
         }
-        res.send("<b>PDF Uploaded Successfully</b><br/><a href='http://localhost:3000/add_books.html' class='btn btn-primary btn-sm'>Go Back</a>");
+        res.send("<b>Book Uploaded Successfully</b><br/><a href='http://localhost:3000/add_books.html' class='btn btn-primary btn-sm'>Go Back</a>");
     });
 });
 
