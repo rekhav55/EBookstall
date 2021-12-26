@@ -1,8 +1,6 @@
 <!doctype html>
 <html lang="en">
-
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -32,25 +30,9 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
-            <!-- <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
-                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Available Books" style="padding-left: 20px;">
-                    <a class="nav-link nav-link-collapse" href="available_books.html">
-                        <span class="nav-link-text">View available books</span>
-                    </a>
-                </li>
-            </ul> -->
-
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item dropdown" style="padding-right:10px; margin-top:5px;">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white; text-size-adjust:80px;">
-                      Profile
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="margin-top:13px; width:170px;">
-                        <span class="count-name" style="padding-left:10px;">Name: </span>
-                        <span class="count-numbers" id="first-name1"></span>
-                        <span class="count-name" style="padding-left:10px;">License: </span>
-                        <span class="count-numbers" id="lno1"></span>
-                    </div>
+                <li class="nav-item" style="margin-top:15px; margin-right:10px;">
+                    <span style="color:white" id="first-name1">Hi, </span>
                 </li>
                 <li class="nav-item" data-toggle="tooltip" data-placement="left" title="Logout" style="padding-right:30px;">
                     <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
@@ -61,41 +43,10 @@
         </div>
     </nav>
     <!-- navbar: end -->
-
-    <div class="content-wrapper">
-        <div class="container">
-            <!-- <div class="row mt-5">
-                <div class="col-md-4">
-                    <div class="card-counter primary">
-                        <i class="fas fa-code-branch"></i>
-                        <span class="count-numbers" id="first-name"></span>
-                        <span class="count-name">First Name</span>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card-counter danger">
-                        <i class="far fa-paper-plane"></i>
-                        <span class="count-numbers" id="last-name"></span>
-                        <span class="count-name">Last Name</span>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card-counter info">
-                        <i class="fa fa-users"></i>
-                        <span class="count-numbers" id="lno"></span>
-                        <span class="count-name">License No</span>
-                    </div>
-                </div>
-            </div>
-            <br/><br/> -->
-            <div class="card" style="margin-top: 100px;">
-                <div class="card-header">
-                    <h4 class="text-center">Rented Books</h4>
-                </div>
-                <div class="card-body" id="view-rented-books-user">
-                </div>
-            </div>
-        </div>
+    
+    <!-- Rented Book Table-->
+    <div class="container" id="view-rented-books-user">
+    </div>
 
         <!-- Logout Modal-->
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -119,9 +70,7 @@
     </div>
 
 
-    <!-- Bootstrap core JavaScript
-================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
+    <!-- Scripts-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- Core plugin JavaScript-->

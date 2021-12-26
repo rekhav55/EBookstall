@@ -35,49 +35,6 @@ $('#btn-logout').on('click', function (e) {
 	window.location.href = "index.html";
 });
 
-/****** Function to initialize datepickers with the current date and triggers them for changes*/
-function initiateDatePickers(){
- $( function() {
-    $('#datepicker1').datepicker({ dateFormat: 'yy-mm-dd' ,
-     minDate: 0,
-     onSelect: function(date){
-
-        var selectedDate = new Date(date);
-        var msecsInADay = 86400000;
-        var endDate = new Date(selectedDate.getTime() + msecsInADay);
-
-       //Set Minimum Date of EndDatePicker After Selected Date of StartDatePicker
-        $("#datepicker2").datepicker( "option", "minDate", endDate );
-      
-    }
-
-  }).val();
- } );
-
-    $( function() {
-        
-        $('#datepicker2').datepicker({ dateFormat: 'yy-mm-dd' ,
-    
-        onSelect: function(date){
-        var from = $('#datepicker1').val();
-        var to = $('#datepicker2').val();
-
-        // end - start returns difference in milliseconds 
-        var diff = new Date(Date.parse(to) - Date.parse(from))
-        console.log(diff);
-        // get days
-        var days = diff/1000/60/60/24;
-        $('#days').val(days);
-        var pricePerDay = $("#price").val();
-        $("#tot").val(days*pricePerDay);
-        }
-    } );
-    });
-}
-
-
-
-
 /****** Loading the methods when page loads ******/ 
 if (CURRENT_URL.includes('user_dashboard')) 
 {
@@ -196,14 +153,11 @@ function getUser() {
             console.log(form_details[0]);
             console.log(form_details[0].FirstName);
             console.log(form_details.length);
-            $('#first-name').html(form_details[0].FirstName);
-            $('#first-name1').html(form_details[0].FirstName);
+            $('#first-name1').append(form_details[0].FirstName);
             $('#last-name').html(form_details[0].LastName);
             $('#email').html(form_details[0].Email);
             $('#lno').html(form_details[0].LicenseNumber);
             $('#lno1').html(form_details[0].LicenseNumber);
-           
-            
         }
     })
     .catch(function (error) {
@@ -224,20 +178,6 @@ function loadAvailableBooksTable() {
     console.log(response.data)
     html = ''
     response.data.forEach(request => {
-        
-    //     if(i % 3 === 0 || i === 0){
-    //         html += '<tr style="border:5px;">'
-    //     }
-    //     i=i+1;
-    //     html +='<td align="center" style="border: 1px solid; border-radius: 700px; background-color:white; margin-top:15px;">'+'<a href="book_details.html#'+request.ISBN+'"title="">'+'<img id="thumb" style="width:150px;height:200px" src="./images/'+ request.ISBN +'.png"/>'+'</a>'+'<br><br>' ;
-    //     html +='<b>'+request.BookName+" by "+'</b>'+'<b>'+request.Author+'</b><br>';
-    //     html +='<b>'+"Rs."+request.PricePerDay + '</b></br>';
-       
-    //    '</td>' ;
-      
-    //   if(i % 3 === 0 || i === 0){
-    //     html += '</tr>'
-    //    }
     if(i % 5=== 0 || i === 0){
         html += '<div class="row" style="margin:10px;">';
     }
@@ -264,20 +204,6 @@ function loadAvailableBooksTableEngineering() {
     console.log(response.data)
     html = ''
     response.data.forEach(request => {
-        
-    //     if(i % 3 === 0 || i === 0){
-    //         html += '<tr style="border:5px;">'
-    //     }
-    //     i=i+1;
-    //     html +='<td align="center" style="border: 1px solid; border-radius: 700px; background-color:white; margin-top:15px;">'+'<a href="book_details.html#'+request.ISBN+'"title="">'+'<img id="thumb" style="width:150px;height:200px" src="./images/'+ request.ISBN +'.png"/>'+'</a>'+'<br><br>' ;
-    //     html +='<b>'+request.BookName+" by "+'</b>'+'<b>'+request.Author+'</b><br>';
-    //     html +='<b>'+"Rs."+request.PricePerDay + '</b></br>';
-       
-    //    '</td>' ;
-      
-    //   if(i % 3 === 0 || i === 0){
-    //     html += '</tr>'
-    //    }
     if(request.Category == "Engineering"){
     if(i % 5=== 0 || i === 0){
         html += '<div class="row" style="margin:10px;">';
@@ -328,81 +254,6 @@ function getBookDetails(){
         }})        
 }
 
-// ********* Update with Rented Details*****************
-
-//  function updateUserWithRentedDetails() {
-//     console.log("Function called");
-//     let isbn=''
-//         if (CURRENT_URL.includes('#')) {
-//              isbn = CURRENT_URL.substr(CURRENT_URL.indexOf('#') + 1, CURRENT_URL.length);
-//             console.log(isbn);
-//         }
-//     let userInfo = localStorage.getItem(USER_INFO) ? JSON.parse(localStorage.getItem(USER_INFO)) : [];
-//     let email = userInfo.userData.Email;
-   
-//     let data = {
-//         ISBN: isbn,
-//         FromDate: $("#datepicker1").val(),
-//         ToDate: $("#datepicker2").val(),
-//         ReturnedDate: "0",
-//         FeeDate: "0",
-//         Fee: 0,
-       
-//     }
-//     console.log(data);
-//     axios.post(baseUrlLocal+'/register/info/'+email,data, {headers: headers})
-//         .then(response => {
-           
-//         })
-//         .catch(error => {
-//             $.notify("Invalid Updation","warn");
-        
-//             console.log(error);
-//         })
-
-//     axios.post(baseUrlLocal+'/book/'+data.ISBN,data, {headers: headers})
-//         .then(response => {
-           
-//         })
-//         .catch(error => {
-//             $.notify("Invalid Updation","warn");
-        
-//             console.log(error);
-//         })
-// }
-// //Triggering to any change in the ISBN
-// $(document).ready(function() {   
-
-//         $(document).on("change", "#isbn", function() {
-//       console.log("changing")
-//             let datax = {
-//             isbn : $("#isbn").val()
-//             }
-//              axios.get(baseUrlLocal+'/register/bookmodel/'+datax.isbn)
-//              .then(function (response) {
-//                 let form_details = response.data.data;
-//                 console.log(form_details[0].Qty)  
-//                 $("#fromdate").val(form_details[0].FromDate);  
-//                 $("#todate").val(form_details[0].ToDate);  
-     
-//              })
-//              .catch(function (error) {
-//                  // handle error
-//                  console.log(error);
-//              });
-
-//              axios.get(baseUrlLocal + '/book/info/'+datax.isbn).then(function (response) {
-//                 if (response.data) {
-//                     console.log(response);
-//                    pricePerDay = response.data.data[0].PricePerDay;
-//                    console.log(pricePerDay);
-//                 }
-//             }).catch(function (error) {
-//                 console.log(error);
-//             });
-//         })
-// }); -->
-
 function insertEachUserRent() {
     console.log('rent');
     let userInfo = localStorage.getItem(USER_INFO) ? JSON.parse(localStorage.getItem(USER_INFO)) : [];
@@ -412,7 +263,7 @@ function insertEachUserRent() {
         ISBN: $("#ISBN").text(),
         BookName: $("#book-name").text(),
         Author: $("#author").text(),  
-    }   
+    };   
     axios.post(baseUrlLocal + '/rent/' + rentData.ISBN, rentData, {
             headers: headers
         })
@@ -435,11 +286,11 @@ function loadRentedBooksTable() {
         let userInfo = localStorage.getItem(USER_INFO) ? JSON.parse(localStorage.getItem(USER_INFO)) : [];
         let email = userInfo.userData.Email;
         console.log(email+'hi');
+        let i=0;
         axios.get(baseUrlLocal + '/rent/'+email)
         .then(response => {
             if (response.status == 200) {
-                $('#view-rented-books-user').append(getRentedBookTable('rented-books', response.data));
-                window.$('#rented-books').DataTable();
+                $('#view-rented-books-user').append(getRentedBookTable(i,response.data));
             }
         })
         .catch(err => {
@@ -447,36 +298,19 @@ function loadRentedBooksTable() {
         });
     }
     
-    function getRentedBookTable(tableId, book) {
-            let html =
-                '<table class="table table-bordered table-hover" id="'+ tableId +'">' +
-                '<thead>' +
-                '<tr>' +
-                '<th class="text-center" scope="col">ISBN</th>' +
-                '<th class="text-center" scope="col">Name of the Book</th>' +
-                '<th class="text-center" scope="col">Author</th>' +
-                '<th class="text-center" scope="col">Your Book</th>' +
-                '</tr>' +
-                '</thead>' +
-                '<tbody>';  
-        
-            
+    function getRentedBookTable(i,book) {
+            let html ='' 
                 book.forEach(request => {
-                html +=
-                    '<tr>'+
-                        '<td align="center">' + request.ISBN + '</td>' +
-                        '<td align="center">' + request.BookName + '</td>' +
-                        '<td align="center">' + request.Author + '</td>' +
-                        '<td align="center">' + '<a style="text-decoration:none;" href="./images/' + request.ISBN + '.pdf">Book</a>' + '</td>'
-               
-                        
-                        
-                    '</tr>';
+                   if(i % 3=== 0 || i === 0){
+                        html += '<div class="row" style="margin:10px;">';
+                    }
+                    i=i+1;
+                    html+='<div class="card" style="margin:10px;">'+'<a href="./images/'+request.ISBN+'.pdf">'+'<img id="thumb" style="width:250px;height:300px;display:inline-block;margin:10px;" src="./images/'+ request.ISBN +'.png"/>'+'</a>'+'<div class="container-fluid" style="width:250px; font-size:14px;">'+request.BookName+'<p style="font-size:12px;">'+'<b>'+"by "+request.Author+'</b>'+'</p>'+'</div>'+'</div>';
+                    if(i % 3 === 0 || i === 0){
+                        html += '</div>';
+                    }
             });
-        
-            html += '</tbody></table>'; 
-        
-            return html;
+    return html;
 }
 // ******************* Add New Book***********************
 function addNewBook() {
